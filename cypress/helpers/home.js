@@ -1,3 +1,6 @@
+import { homePage } from "../locators/home"
+import { producPage } from "./product"
+
 export function verifyHomeElements() {
     cy.get('.logo').should('be.visible').click()
     cy.url().should('be.eq', Cypress.config('baseUrl'))
@@ -6,7 +9,7 @@ export function verifyHomeElements() {
         .trigger('mouseover') // @todo verify menu elements
     // Verify the footer
 
-    cy.get('.page-footer')
+    cy.get(homePage.footer)
         .should('contain.text', 'Write for us')
         .and('contain.text', 'Subscribe to our mailing list')
         .and('contain.text', 'Contact us')
@@ -18,16 +21,17 @@ export function verifyHomeElements() {
 
 
 export function addSingleToCart(quantity, size, color) {
-    cy.get('.product-item')
+    cy.get(homePage.productItem)
             .first()
-            .find('.product-image-wrapper')
+            .find(homePage.productImage)
             .click()
 
         cy.url().should('include', '/radiant-tee.html')
-        cy.get('#option-label-size-143-item-168').click()
-        cy.get('[class="swatch-attribute size"]').find('.swatch-attribute-selected-option').should('be.visible').and('have.text', size)
+        cy.pause()
+        cy.get(producPage.sizeMOption).click()
+        cy.get(producPage.sizeSection).find('.swatch-attribute-selected-option').should('be.visible').and('have.text', size)
         cy.get('#option-label-color-93-item-50').click()
-        cy.get('[class="swatch-attribute color"]').find('.swatch-attribute-selected-option').should('be.visible').and('have.text', color)
-        cy.get('#qty').clear().type(quantity)
-        cy.get('#product-addtocart-button').click()
+        cy.get(producPage.colorSection).find('.swatch-attribute-selected-option').should('be.visible').and('have.text', color)
+        cy.get(producPage.productQuantityField).clear().type(quantity)
+        cy.get(producPage.addToCartButton).click()
 }
