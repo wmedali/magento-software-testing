@@ -1,7 +1,7 @@
 
 const { goToSignup, signup, verifyUserLoggedUp, checkStrongMechanism, logout } = require('../helpers/authentication')
 const { checkFooter, goToProduct, checkProductsPresence } = require('../helpers/home')
-const { checkProductAdded, checkProductInCart, fillChippingForm, placeOrder, goToNextStep } = require('../helpers/cart')
+const { checkProductAdded, checkProductInCart, fillShippingForm, placeOrder, goToNextStep } = require('../helpers/cart')
 
 const products = require('../fixtures/data.json')
 const { newUser } = require('../fixtures/user')
@@ -58,7 +58,7 @@ describe('should signup and purchase a product', () => {
         cy.checkout()
 
         // Remplir l'adresse de livraison
-        fillChippingForm(user)
+        fillShippingForm(user)
         goToNextStep()
 
         // Confirmer la commande

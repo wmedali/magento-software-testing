@@ -1,4 +1,5 @@
 import {cartPage} from '../locators/cart'
+import { shippingPage } from '../locators/shipping'
 export function checkProductAdded(product) {
     cy.get('[role="alert"]').should('be.visible').and('contains.text', `You added ${product.name} to your shopping cart.`)
     cy.get('[class="counter-number"]').should('be.visible').and('include.text', product.quantity)
@@ -29,18 +30,17 @@ export function checkTotalPrice(products) {
     })
 
 }
-export function fillChippingForm(user) {
-   //  cy.get('#customer-email').type(user.email)
-    cy.get('[name="firstname"]').should('have.value', user.firstName)
-    cy.get('[name="lastname"]').should('have.value', user.lastName)
-    cy.get('[name="company"]').type(user.company)
+export function fillShippingForm(user) {
+    cy.get(shippingPage.firstName).should('have.value', user.firstName)
+    cy.get(shippingPage.lastName).should('have.value', user.lastName)
+    cy.get(shippingPage.company).type(user.company)
 
-    cy.get('[name="country_id"]').select(user.country)
-    cy.get('[name="street[0]"]').type(user.address)
-    cy.get('[name="city"]').type(user.city)
-    cy.get('[name="postcode"]').type(user.postalCode)
-    cy.get('[name="telephone"]').type(user.phoneNumber)
-    cy.get('[name="ko_unique_2"]').click()
+    cy.get(shippingPage.country).select(user.country)
+    cy.get(shippingPage.address).type(user.address)
+    cy.get(shippingPage.city).type(user.city)
+    cy.get(shippingPage.postalCode).type(user.postalCode)
+    cy.get(shippingPage.phoneNumber).type(user.phoneNumber)
+    cy.get(shippingPage.shippingMethod).click()
 }
 
 export function goToNextStep() {

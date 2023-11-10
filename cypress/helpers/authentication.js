@@ -1,3 +1,4 @@
+import { signupForm } from '../locators/authentication'
 
 const faker = require('@faker-js/faker')
 
@@ -8,35 +9,35 @@ export function goToSignup() {
 
 export function checkStrongMechanism() {
     // Weak Password
-    cy.get('#password').type('Azer', { delay: 500 })
-    cy.get('#password-strength-meter-container')
+    cy.get(signupForm.password).type('Azer', { delay: 500 })
+    cy.get(signupForm.strengthContainer)
         .should('have.class', 'password-weak')
         .find('#password-strength-meter-label')
         .should('have.text', 'Weak')
 
     // Medium password
     cy.get('#password').clear().type('Azerty12')
-    cy.get('#password-strength-meter-container')
+    cy.get(signupForm.strengthContainer)
         .should('have.class', 'password-medium')
-        .find('#password-strength-meter-label')
+        .find(signupForm.strengthMeterLabel)
         .should('have.text', 'Medium')
 
     // Strong password
     cy.get('#password').clear().type('Azerty123*')
-    cy.get('#password-strength-meter-container')
+    cy.get(signupForm.strengthContainer)
         .should('have.class', 'password-strong')
-        .find('#password-strength-meter-label')
+        .find(signupForm.strengthMeterLabel)
         .should('have.text', 'Strong')
 }
 
 export function signup(user) {
-    cy.get('#firstname').type(user.firstName)
-    cy.get('#lastname').type(user.lastName)
-    cy.get('#email_address').type(`${user.firstName}.${user.lastName}@yopmail.com`)
-    cy.get('#password').focus().clear().type(user.password)
-    cy.get('#password-confirmation').type(user.password)
+    cy.get(signupForm.firstName).type(user.firstName)
+    cy.get(signupForm.lastName).type(user.lastName)
+    cy.get(signupForm.firstName).type(`${user.firstName}.${user.lastName}@yopmail.com`)
+    cy.get(signupForm.password).focus().clear().type(user.password)
+    cy.get(signupForm.passwordConfirmation).type(user.password)
 
-    cy.get('#form-validate').contains('Create an Account').click()
+    cy.get(signupForm.validation).contains('Create an Account').click()
 }
 
 export function verifyUserLoggedUp(firstName, lastName) {
