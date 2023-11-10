@@ -2,7 +2,7 @@
     "compilerOptions": {
         "allowJs": true,
         "checkJs": true,
-        "types": ["cypress", "faker"]
+        "types": ["cypress"]
     },
     "include": ["cypress/**/*.js"]
 }

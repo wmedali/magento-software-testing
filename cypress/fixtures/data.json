@@ -1,0 +1,27 @@
+[
+  {
+    "name": "Radiant Tee",
+    "price": 22.00,
+    "size" : "M",
+    "quantity" : 4,
+    "color": "Blue",
+    "url" : "/radiant-tee.html"
+  },
+  {
+    "name": "Breathe-Easy Tank",
+    "price": "34.00",
+    "size" : "L",
+    "quantity" : "2",
+    "color": "White",
+    "url": "/breathe-easy-tank.html"
+  },
+  {
+    "name" : "Argus All-Weather Tank",
+    "product" : "22.00",
+    "size" : "XL",
+    "quantity" : "1",
+    "color": "Gray",
+    "url": "/argus-all-weather-tank.html"
+
+  }
+]
