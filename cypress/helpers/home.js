@@ -22,7 +22,7 @@ export function goToProduct(product) {
 
 export function checkProductsPresence(products) {
     products.forEach((product, index) => {
-        cy.get('.product-item')
+        cy.get(homePage.productItem)
             .eq(index).should('include.text', product.name)
     })
 }

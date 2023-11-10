@@ -16,10 +16,13 @@ describe('should signup and purchase a product', () => {
     it('should create an account successfully', () => {
         // Aller dans la page de creation de compte
         goToSignup()
+
         // Vérifier le fonctionnement du mecanisme de force de mot de passe
         checkStrongMechanism()
+
         // Créer un compte
         signup(user)
+        
         // Vérifier que l'utilisateur est connecté directement après création du compte
         verifyUserLoggedUp(user.firstName, user.lastName)
     })

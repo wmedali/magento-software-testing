@@ -1,4 +1,4 @@
-
+import {cartPage} from '../locators/cart'
 export function checkProductAdded(product) {
     cy.get('[role="alert"]').should('be.visible').and('contains.text', `You added ${product.name} to your shopping cart.`)
     cy.get('[class="counter-number"]').should('be.visible').and('include.text', product.quantity)
@@ -7,19 +7,28 @@ export function checkProductAdded(product) {
 export function checkProductInCart(product) {
     // Verifier les détails de produit dans le panier
     cy.get('[id="shopping-cart-table"]').within(() => {
-        cy.get('[class="product-item-name"]')
+        cy.get(cartPage.productName)
             .should('contain.text', product.name)
-        cy.get('[class="item-options"]')
+        cy.get(cartPage.productOptions)
             .should('contain.text', product.color)
                 .and('contain.text', product.size)
-        cy.get('[title="Qty"]').should('contain.value', product.quantity)
-        cy.get('[data-th="Price"]').should('contain.text', product.price)
-        cy.get('[data-th="Subtotal"]').should('include.text', product.price * product.quantity)
-
-    })
-        
+        cy.get(cartPage.productQuantity).should('contain.value', product.quantity)
+        cy.get(cartPage.productUnitPrice)
+            .should('contain.text', product.price)
+        cy.get(cartPage.productTotalPrice).should('include.text', product.price * product.quantity)
+    })  
 }
 
+export function checkTotalPrice(products) {
+    let total = 0;
+    products.forEach(product => {
+        total += product * quantity
+    })
+    cy.get('#id="cart-totals"').within(() => {
+        cy.get(cartPage.cartSubtotal).should('include.text', total)
+    })
+
+}
 export function fillChippingForm(user) {
    //  cy.get('#customer-email').type(user.email)
     cy.get('[name="firstname"]').should('have.value', user.firstName)
